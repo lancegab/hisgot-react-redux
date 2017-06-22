@@ -22,7 +22,7 @@ export default class MessageItem extends Component{
     }
 
     console.log("ID: ", obj);
-    axios.post('/findChildrenMessage', obj).then(function(msgs){
+    axios.post('/findMessages', obj).then(function(msgs){
       console.log(msgs.data);
       // _this.createListItems(msgs.data);
       _this.setState({
@@ -46,7 +46,9 @@ export default class MessageItem extends Component{
       <div className="individual--messages">
 							<h4>{this.props.content}</h4>
                 <button onClick={this.findChildren}>View replies</button>
+
               {children}
+
 							{/* <br><br>{message.sender} -
 							{message.createdAt} */}
 

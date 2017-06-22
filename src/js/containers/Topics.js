@@ -19,25 +19,25 @@ class Topics extends Component{
               headline={topics.headline}
               id={topics.id}
               selectTopic={this.props.selectTopic}
-              updateHeadMessage={this.updateHeadMessage.bind(this)}/>
+              updateHeadMessage={this.props.updateHeadMessage}/>
         )
     });
   }
 
-  updateHeadMessage(object){
-    const _this = this;
-    var obj = {
-      message : object.message_id
-    }
-
-    axios.post("/findHeadMessage", obj)
-      .then(function(response){
-        _this.props.updateHeadMessage(response.data);
-      })
-      .catch(function (error){
-        console.log(error);
-      });
-  }
+  // updateHeadMessage(object){
+  //   const _this = this;
+  //   var obj = {
+  //     message : object.message_id
+  //   }
+  //
+  //   axios.post("/findHeadMessage", obj)
+  //     .then(function(response){
+  //       _this.props.updateHeadMessage(response.data);
+  //     })
+  //     .catch(function (error){
+  //       console.log(error);
+  //     });
+  // }
 
   render(){
     return (

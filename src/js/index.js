@@ -2,13 +2,13 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Route, Router, IndexRoute, browserHistory} from 'react-router';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import allReducers from './reducers/index';
 import {Provider} from 'react-redux';
-
+import thunk from 'redux-thunk';
 import App from './components/App';
 
-const store = createStore(allReducers);
+const store = createStore(allReducers, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store = {store}>

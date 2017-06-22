@@ -7,12 +7,13 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import MessageItem from './MessageItem';
 import {selectMessage} from '../actions/index'
+import {findMessages} from '../actions/index'
 class Messages extends Component{
   //add message displays here
   createListItems(){
     return this.props.messages.map((messages) => {
       return (
-            <MessageItem key={messages.id}{...messages} content={messages.content} id={messages.id} selectMessage={this.props.selectMessage}/>
+            <MessageItem key={messages.id}{...messages} content={messages.content} id={messages.id} selectMessage={this.props.selectMessage} findMessages={this.props.findMessages}/>
         )
     });
   }
@@ -41,7 +42,8 @@ function mapStateToProps(state){
 
 function matchDispatchToProps(dispatch){
   return bindActionCreators({
-    selectMessage: selectMessage
+    selectMessage: selectMessage,
+    findMessages: findMessages
   }, dispatch);
 }
 

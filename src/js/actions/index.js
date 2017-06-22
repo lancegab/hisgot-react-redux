@@ -1,3 +1,6 @@
+import axios from 'axios';
+import thunk from 'redux-thunk';
+
 export const selectCategory = (category) => {
   return {
     type: "CATEGORY_SELECTED",
@@ -19,20 +22,14 @@ export const selectMessage = (message) => {
   }
 };
 
-export const findCategories = (categories) => {
-  return {
-    type: "FIND_CATEGORIES",
-    payload: categories
+export const findCategories = () => {
+  const request = axios.get('/findCategories');
+  return (dispatch) =>{
+    request.then(({data}) => {
+      dispatch({type: 'FIND_CATEGORIES', payload: data});
+    })
   }
 };
-
-// export const updateCategories = (categories) => {
-//   // console.log("updaTE");
-//   return {
-//     type: "UPDATE_CATEGORIES",
-//     payload: categories
-//   }
-// };
 
 export const findTopics = (topics) => {
   return {
@@ -48,9 +45,24 @@ export const findMessages = (messages) => {
   }
 };
 
-export const updateHeadMessage = (message) => {
-  return {
-    type: "UPDATE_HEAD_MESSAGE",
-    payload: message
+// export const findMessages = (message) => {
+//   var obj = {message : message.id};
+//   const request = axios.get('/findMessages');
+//   return (dispatch) => {
+//     request.then(({data}) => {
+//       dispatch({type: "FIND_MESSAGES", payload: data});
+//     })
+//   }
+// };
+
+export const updateHeadMessage = (topic) => {
+
+  var obj = {message: topic.message_id}
+
+  const request = axios.post('/findHeadMessage', obj)
+  return (dispatch)=>{
+    request.then(({data}) => {
+      dispatch({type: "UPDATE_HEAD_MESSAGE", payload: data});
+    })
   }
 };

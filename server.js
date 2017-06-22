@@ -53,7 +53,7 @@ app.post('/findHeadMessage', function(request,response){
   })
 });
 
-app.post('/findChildrenMessage', function(request,response){
+app.post('/findMessages', function(request,response){
   Messages.findAll({where: {ref_id: request.body.message}}).then(function(msg){
     response.send(msg);
   })

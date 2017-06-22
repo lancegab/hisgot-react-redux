@@ -48,7 +48,6 @@ class Categories extends Component{
   }
 
   createListItems(){
-    // console.log("PROPS ", this.props.categories);
     return this.props.categories.map((categories) => {
       return (
             <CategoryItem
@@ -64,11 +63,9 @@ class Categories extends Component{
   }
 
   render(){
-    // console.log("RENDER");
     return (
       <div className="categories">
-        <div onClick = {this.searchCategories.bind(this)}><button className="dropbtn" onClick={this.toggleDropdown}>Categories</button></div>
-        {/* <div onClick = {api.searchCategories()}><button className="dropbtn" onClick={this.toggleDropdown}>Categories</button></div> */}
+        <div onClick = {this.props.findCategories}><button className="dropbtn" onClick={this.toggleDropdown}>Categories</button></div>
           <div id="categoryDropdown" className="dropdown-content">
             {this.createListItems()}
 					</div>
@@ -89,7 +86,6 @@ function matchDispatchToProps(dispatch){
     selectCategory: selectCategory,
     findCategories: findCategories,
     findTopics: findTopics
-    // updateCategories: updateCategories
   }, dispatch);
 }
 
