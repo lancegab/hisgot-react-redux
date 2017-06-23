@@ -11,14 +11,13 @@ import App from './components/App';
 const store = createStore(allReducers, applyMiddleware(thunk));
 
 ReactDOM.render(
-  <Provider store = {store}>
-    <Router history={browserHistory}>
-  		<Route path="/" component={App}>
-        {/* <Route path="categories(/:id)" name = "categories" component={Categories}></Route>
-        <Route path="topics(/:id)" name = "topics" component={Topics}></Route> */}
-  		</Route>
-  	</Router>
-  </Provider>,
+     <Provider store={store}>
+          <Router history={browserHistory}>
+               <Route path="/" component={App}>
+                    {/* <Route path="categories(/:id)" name = "categories" component={Categories}></Route>
+             <Route path="topics(/:id)" name = "topics" component={Topics}></Route> */}
+               </Route>
+          </Router>
+     </Provider>,
 
-  document.getElementById('container')
-);
+     document.getElementById('container'));

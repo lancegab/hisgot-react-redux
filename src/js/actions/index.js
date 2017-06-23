@@ -2,47 +2,32 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 
 export const selectCategory = (category) => {
-  return {
-    type: "CATEGORY_SELECTED",
-    payload: category
-  }
+     return {type: "CATEGORY_SELECTED", payload: category}
 };
 
 export const selectTopic = (topic) => {
-  return {
-    type: "TOPIC_SELECTED",
-    payload: topic
-  }
+     return {type: "TOPIC_SELECTED", payload: topic}
 };
 
 export const selectMessage = (message) => {
-  return {
-    type: "MESSAGE_SELECTED",
-    payload: topic
-  }
+     return {type: "MESSAGE_SELECTED", payload: topic}
 };
 
 export const findCategories = () => {
-  const request = axios.get('/findCategories');
-  return (dispatch) =>{
-    request.then(({data}) => {
-      dispatch({type: 'FIND_CATEGORIES', payload: data});
-    })
-  }
+     const request = axios.get('/findCategories');
+     return (dispatch) => {
+          request.then(({data}) => {
+               dispatch({type: 'FIND_CATEGORIES', payload: data});
+          })
+     }
 };
 
 export const findTopics = (topics) => {
-  return {
-    type: "FIND_TOPICS",
-    payload: topics
-  }
+     return {type: "FIND_TOPICS", payload: topics}
 };
 
 export const findMessages = (messages) => {
-  return {
-    type: "FIND_MESSAGES",
-    payload: messages
-  }
+     return {type: "FIND_MESSAGES", payload: messages}
 };
 
 // export const findMessages = (message) => {
@@ -57,12 +42,14 @@ export const findMessages = (messages) => {
 
 export const updateHeadMessage = (topic) => {
 
-  var obj = {message: topic.message_id}
+     var obj = {
+          message: topic.message_id
+     }
 
-  const request = axios.post('/findHeadMessage', obj)
-  return (dispatch)=>{
-    request.then(({data}) => {
-      dispatch({type: "UPDATE_HEAD_MESSAGE", payload: data});
-    })
-  }
+     const request = axios.post('/findHeadMessage', obj)
+     return (dispatch) => {
+          request.then(({data}) => {
+               dispatch({type: "UPDATE_HEAD_MESSAGE", payload: data});
+          })
+     }
 };

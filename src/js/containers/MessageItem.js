@@ -1,58 +1,51 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Component } from 'react';
-import {render} from 'react-dom' ;
+import {Component} from 'react';
+import {render} from 'react-dom';
 import {Link} from 'react-router';
 import axios from 'axios';
 
-export default class MessageItem extends Component{
-  constructor() {
-    super();
-    this.state = {
-      children: []
-    };
-    this.createListItems = this.createListItems.bind(this);
-    this.findChildren = this.findChildren.bind(this);
-  }
+export default class MessageItem extends Component {
+     constructor() {
+          super();
+          this.state = {
+               children: []
+          };
+          this.createListItems = this.createListItems.bind(this);
+          this.findChildren = this.findChildren.bind(this);
+     }
 
-  findChildren(){
-    var _this = this;
-    var obj = {
-      message : _this.props.id
-    }
+     findChildren() {
+          var _this = this;
+          var obj = {
+               message: _this.props.id
+          }
 
-    console.log("ID: ", obj);
-    axios.post('/findMessages', obj).then(function(msgs){
-      console.log(msgs.data);
-      // _this.createListItems(msgs.data);
-      _this.setState({
-        children: msgs.data
-      });
-    })
-  }
+          axios.post('/findMessages', obj).then(function(msgs) {
+               console.log(msgs.data);
+               _this.setState({children: msgs.data});
+          })
+     }
 
-  createListItems(){
-    console.log("LISTING");
-    return this.state.children.map((messages) => {
-      return (
-            <MessageItem key={messages.id}{...messages} content={messages.content} id={messages.id} selectMessage={this.props.selectMessage}/>
-        )
-    });
-  }
+     createListItems() {
+          return this.state.children.map((messages) => {
+               return (<MessageItem {...messages} key={messages.id} content={messages.content} id={messages.id} selectMessage={this.props.selectMessage}/>)
+          });
+     }
 
-  render(){
-    var children = this.createListItems();
-    return (
-      <div className="individual--messages">
-							<h4>{this.props.content}</h4>
-                <button onClick={this.findChildren}>View replies</button>
+     render() {
+          var children = this.createListItems();
+          return (
+               <div className="individual--messages">
+                    <h4>{this.props.content}</h4>
+                    <button onClick={this.findChildren}>View replies</button>
 
-              {children}
+                    {children}
 
-							{/* <br><br>{message.sender} -
+                    {/* <br><br>{message.sender} -
 							{message.createdAt} */}
 
-							{/* <button onclick="showMessageField()">Reply</button>
+                    {/* <button onclick="showMessageField()">Reply</button>
 
 							<form action="#" method = "get" id = "viewReplies">
 								<input id = "parentMessage" type="hidden" name="message_id" value="{{message.id}}">
@@ -69,7 +62,7 @@ export default class MessageItem extends Component{
 								</div>
 							</div>
 							<ol id="replyContainer"></ol> */}
-			</div>
-    )
-  }
+               </div>
+          )
+     }
 }

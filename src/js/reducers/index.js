@@ -11,15 +11,15 @@ import ActiveMessageReducer from './reducer-active-message';
 import HeadMessageReducer from './reducer-head-message';
 
 const allReducers = combineReducers({
-  categories: CategoriesReducer,
-  topics: TopicsReducer,
-  messages: MessagesReducer,
+     categories: CategoriesReducer,
+     topics: TopicsReducer,
+     messages: MessagesReducer,
 
-  activeCategory: ActiveCategoryReducer,
-  activeTopic: ActiveTopicReducer,
-  activeMessage: ActiveMessageReducer,
+     activeCategory: ActiveCategoryReducer,
+     activeTopic: ActiveTopicReducer,
+     activeMessage: ActiveMessageReducer,
 
-  headMessage: HeadMessageReducer
+     headMessage: HeadMessageReducer
 });
 
 export default allReducers;
