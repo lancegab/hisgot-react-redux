@@ -3,6 +3,9 @@ export default function(state = [], action) {
           case "FIND_MESSAGES":
                return state;
                break;
+          case "FIND_CHILDREN_MESSAGES":
+               return state;
+               break;
           default:
                return state;
 

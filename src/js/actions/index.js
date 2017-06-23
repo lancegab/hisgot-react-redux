@@ -30,15 +30,19 @@ export const findMessages = (messages) => {
      return {type: "FIND_MESSAGES", payload: messages}
 };
 
-// export const findMessages = (message) => {
-//   var obj = {message : message.id};
-//   const request = axios.get('/findMessages');
-//   return (dispatch) => {
-//     request.then(({data}) => {
-//       dispatch({type: "FIND_MESSAGES", payload: data});
-//     })
-//   }
-// };
+export const clearMessages = () => {
+     return {type: "CLEAR_MESSAGES", payload: []}
+};
+
+export const findChildrenMessages = (message_id) => {
+  var obj = {message : message_id};
+  const request = axios.post('/findChildrenMessages', obj);
+  return (dispatch) => {
+    request.then(({data}) => {
+      dispatch({type: "FIND_CHILDREN_MESSAGES", payload: data});
+    })
+  }
+};
 
 export const updateHeadMessage = (topic) => {
 
@@ -46,10 +50,18 @@ export const updateHeadMessage = (topic) => {
           message: topic.message_id
      }
 
-     const request = axios.post('/findHeadMessage', obj)
+     const request = axios.post('/findHeadMessage', obj);
      return (dispatch) => {
           request.then(({data}) => {
-               dispatch({type: "UPDATE_HEAD_MESSAGE", payload: data});
+               var obj2 = {message: data.id};
+               const request2 = axios.post('/findChildrenMessages', obj2);
+
+               var messageHead = data;
+
+               request2.then(({data}) => {
+                    messageHead.children = data;
+                    dispatch({type: "UPDATE_HEAD_MESSAGE", payload: messageHead});
+               })
           })
      }
 };

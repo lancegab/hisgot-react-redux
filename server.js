@@ -56,6 +56,19 @@ app.post('/findHeadMessage', function(request, response) {
      })
 });
 
+app.post('/findChildrenMessages', function(request, response) {
+     console.log("findChildrenMessages");
+
+     Messages.findAll({
+          where: {
+               ref_id: request.body.message
+          }
+     }).then(function(msg) {
+          response.send(msg);
+     })
+});
+
+
 app.post('/findMessages', function(request, response) {
      Messages.findAll({
           where: {
@@ -68,7 +81,6 @@ app.post('/findMessages', function(request, response) {
 
 app.post('/selectCategory', function(req, res) {
      var id = request.body.category_id;
-     console.log(id);
 });
 
 app.get('*', function(request, response) {

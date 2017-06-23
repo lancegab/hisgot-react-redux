@@ -5,7 +5,6 @@ export default function(state = [], action) {
                return state;
                break;
           default:
-               console.log("DEFAULT ", state);
                return state;
      }
 }

@@ -4,8 +4,11 @@ import {Component} from 'react';
 import {render} from 'react-dom';
 import {Link} from 'react-router';
 import axios from 'axios';
+import {findChildrenMessages} from '../actions/index';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
-export default class MessageItem extends Component {
+class MessageItem extends Component {
      constructor() {
           super();
           this.state = {
@@ -33,14 +36,24 @@ export default class MessageItem extends Component {
           });
      }
 
+     createChildren() {
+          var c = [];
+          if(this.props.children == null)
+               c = [];
+          else {
+               c = this.props.children;
+          }
+          return c.map((messages) => {
+               return (<MessageItem {...messages} key={messages.id} content={messages.content} id={messages.id}/>)
+          });
+     }
+
      render() {
-          var children = this.createListItems();
           return (
                <div className="individual--messages">
                     <h4>{this.props.content}</h4>
                     <button onClick={this.findChildren}>View replies</button>
-
-                    {children}
+                    {this.createChildren()}
 
                     {/* <br><br>{message.sender} -
 							{message.createdAt} */}
@@ -66,3 +79,18 @@ export default class MessageItem extends Component {
           )
      }
 }
+
+function mapStateToProps(state) {
+     console.log("STATE ", state.messages);
+     return {
+          messages: state.messages
+     }
+}
+
+function matchDispatchToProps(dispatch) {
+     return bindActionCreators({
+          findChildrenMessages: findChildrenMessages
+     }, dispatch);
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(MessageItem);
